@@ -13,6 +13,7 @@ public class Patient implements Comparable<Patient> {
     private String address;
     public Patient() {
     }
+    //added
     public Patient(int patientId, String fullName, Date dateOfBirth, String contactNumber, String email,
             String address) {
         this.patientId = patientId;
