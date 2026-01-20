@@ -1,11 +1,21 @@
 package com.edutech.progressive.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "doctor")
 public class Doctor implements Comparable<Doctor> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int doctorId;
     private String fullName;
-    private String specialty; 
-    private String contactNumber; 
-    private String email; 
+    private String specialty;
+    private String contactNumber;
+    private String email;
     private int yearsOfExperience;
     public Doctor() {
     }
@@ -54,9 +64,15 @@ public class Doctor implements Comparable<Doctor> {
     public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
+    
     @Override
     public int compareTo(Doctor o) {
-        return this.getYearsOfExperience() - o.getYearsOfExperience();
+        return Integer.compare(this.yearsOfExperience, o.yearsOfExperience);
     }
-    
+    @Override
+    public String toString() {
+        return "Doctor [doctorId=" + doctorId + ", fullName=" + fullName + ", specialty=" + specialty
+                + ", contactNumber=" + contactNumber + ", email=" + email + ", yearsOfExperience=" + yearsOfExperience
+                + "]";
+    }
 }

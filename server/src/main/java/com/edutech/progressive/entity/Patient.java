@@ -2,18 +2,24 @@ package com.edutech.progressive.entity;
 
 import java.util.Date;
 
-// import java.sql.Date;
-
-public class Patient implements Comparable<Patient> {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
+public class Patient implements Comparable<Patient>{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int patientId;
     private String fullName;
     private Date dateOfBirth;
     private String contactNumber;
     private String email;
     private String address;
+
     public Patient() {
     }
-    //added newly
+    
     public Patient(int patientId, String fullName, Date dateOfBirth, String contactNumber, String email,
             String address) {
         this.patientId = patientId;
@@ -61,10 +67,11 @@ public class Patient implements Comparable<Patient> {
     }
     @Override
     public int compareTo(Patient o) {
-        return this.getFullName().compareTo(o.getFullName());
+        return this.fullName.compareTo(o.fullName);
     }
-
-    
-
-    
+    @Override
+    public String toString() {
+        return "Patient [patientId=" + patientId + ", fullName=" + fullName + ", dateOfBirth=" + dateOfBirth
+                + ", contactNumber=" + contactNumber + ", email=" + email + ", address=" + address + "]";
+    }    
 }
