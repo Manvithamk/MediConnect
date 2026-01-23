@@ -1,9 +1,12 @@
 package com.edutech.progressive.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,13 +14,15 @@ import javax.persistence.Table;
 public class Clinic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int clinicId;
     private String clinicName;
     private String location;
-    private int doctorId;
     private String contactNumber;
     private int establishedYear;
+
+    @ManyToOne()
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
     public Clinic(){
 
@@ -27,9 +32,19 @@ public class Clinic {
         this.clinicId = clinicId;
         this.clinicName = clinicName;
         this.location = location;
-        this.doctorId = doctorId;
+        this.doctor = new Doctor();
+        this.doctor.setDoctorId(doctorId);
         this.contactNumber = contactNumber;
         this.establishedYear = establishedYear;
+    }
+
+    
+    public Clinic(String clinicName, String location, String contactNumber, int establishedYear, Doctor doctor) {
+        this.clinicName = clinicName;
+        this.location = location;
+        this.contactNumber = contactNumber;
+        this.establishedYear = establishedYear;
+        this.doctor = doctor;
     }
 
     public int getClinicId() {
@@ -56,14 +71,6 @@ public class Clinic {
         this.location = location;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
     public String getContactNumber() {
         return contactNumber;
     }
@@ -79,4 +86,12 @@ public class Clinic {
     public void setEstablishedYear(int establishedYear) {
         this.establishedYear = establishedYear;
     }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }   
 }
